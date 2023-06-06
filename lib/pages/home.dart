@@ -66,9 +66,9 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(
                     height: 10,
                   ),
-                  // PlusButton(
-                  //   function: _transaksibaru,
-                  // ),
+                  PlusButton(
+                      // function: _transaksibaru,
+                      ),
                 ],
               ),
             ),

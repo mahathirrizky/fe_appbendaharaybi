@@ -46,6 +46,5 @@ class DrawerSidebar extends StatelessWidget {
         ],
       ),
     );
-    ;
   }
 }
