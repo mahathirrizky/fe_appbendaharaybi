@@ -25,6 +25,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthError(error: e.toString()));
       }
     });
+
+    on<AuthEventLogout>((event, emit) async {
+      try {
+        emit(AuthLoading());
+        _clearToken();
+        emit(AuthLogout());
+      } catch (e) {
+        emit(AuthError(error: e.toString()));
+      }
+    });
   }
 
   Future<void> _saveToken(String token) async {
@@ -33,5 +43,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   String? getToken() {
     return sharedPreferences.getString('token');
+  }
+
+  Future<void> _clearToken() async {
+    await sharedPreferences.remove('token');
   }
 }

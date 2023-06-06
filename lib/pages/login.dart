@@ -26,7 +26,11 @@ class LoginPage extends StatelessWidget {
                 const SizedBox(
                   height: 25,
                 ),
-                const Icon(Icons.heart_broken),
+                Image.asset(
+                  'assets/images/logoybi.png',
+                  height: 150,
+                  width: 150,
+                ),
                 const SizedBox(
                   height: 20,
                 ),
