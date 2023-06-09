@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../bloc/bloc.dart';
 import '../constants/constants.dart';
 import '../responsive/responsive_layout.dart';
+import '../stream/stream.dart';
 import '../widgets/widgets.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,18 +14,18 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // void _transaksibaru() {
-  //   showDialog(
-  //       barrierDismissible: false,
-  //       context: context,
-  //       builder: (BuildContext context) {
-  //         return StatefulBuilder(
-  //           builder: (BuildContext context, setState) {
-  //             return const AlertCashFlow();
-  //           },
-  //         );
-  //       });
-  // }
+  void _transaksibaru() {
+    showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (BuildContext context) {
+          return StatefulBuilder(
+            builder: (BuildContext context, setState) {
+              return const AlertCashFlow();
+            },
+          );
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,14 +44,14 @@ class _HomePageState extends State<HomePage> {
                     padding: const EdgeInsets.all(25.0),
                     child: Column(
                       children: [
-                        // streambuildertopcard(alurdanaB),
-                        // streambuilderlistdanamasukdankeluar(alurdanaB),
+                        streambuildertopcard(alurdanaB),
+                        streambuilderlistdanamasukdankeluar(alurdanaB),
                         const SizedBox(
                           height: 10,
                         ),
-                        // PlusButton(
-                        //   function: _transaksibaru,
-                        // ),
+                        PlusButton(
+                          function: _transaksibaru,
+                        ),
                       ],
                     ),
                   ),
@@ -61,14 +62,14 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.all(25.0),
               child: Column(
                 children: [
-                  // streambuildertopcard(alurdanaB),
-                  // streambuilderlistdanamasukdankeluar(alurdanaB),
+                  streambuildertopcard(alurdanaB),
+                  streambuilderlistdanamasukdankeluar(alurdanaB),
                   const SizedBox(
                     height: 10,
                   ),
                   PlusButton(
-                      // function: _transaksibaru,
-                      ),
+                    function: _transaksibaru,
+                  ),
                 ],
               ),
             ),
