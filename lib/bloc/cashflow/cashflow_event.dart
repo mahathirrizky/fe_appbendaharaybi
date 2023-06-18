@@ -36,5 +36,6 @@ class CashflowEventEdit extends CashflowEvent {
 
 class CashflowEventDelete extends CashflowEvent {
   final int id;
-  CashflowEventDelete({required this.id}); 
+   final String? imageUrl;
+  CashflowEventDelete({required this.id,this.imageUrl,}); 
 }

@@ -43,8 +43,8 @@ class _AlertTahunState extends State<AlertTahun> {
                       .tahunaktif); // Return the selected tahunaktif value
                 },
                 child: Container(
-                  padding: EdgeInsets.all(10.0),
-                  margin: EdgeInsets.all(3),
+                  padding: const EdgeInsets.all(10.0),
+                  margin: const EdgeInsets.all(3),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     color: widget.tahunaktif == widget.tahun[index]

@@ -31,7 +31,7 @@ class CashflowModel {
         jumlah: json["jumlah"],
         keterangan: json["keterangan"],
         jenis: json["jenis"],
-        imageurl: json["imageurl"],
+        imageurl: json["image_url"],
         createdAt: DateTime.parse(json["createdAt"] as String),
       );
 
@@ -40,7 +40,7 @@ class CashflowModel {
         "jumlah": jumlah,
         "keterangan": keterangan,
         "jenis": jenis,
-        "imageurl": imageurl,
+        "image_url": imageurl,
         "createdAt": createdAt.toIso8601String(),
       };
 }

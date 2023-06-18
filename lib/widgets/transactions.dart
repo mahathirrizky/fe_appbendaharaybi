@@ -1,20 +1,15 @@
-import 'dart:io';
-
 import 'package:appbendaharaybi/models/cashflow_model.dart';
 
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 import '../../constants/constants.dart';
 
 import '../bloc/bloc.dart';
 import '../responsive/responsive_layout.dart';
 import 'alertdelete.dart';
-import 'alerteditdana.dart';
-import 'detailalurdana.dart';
+import 'alerteditcashflow.dart';
+import 'detailcashflow.dart';
 
 class MyTransaction extends StatefulWidget {
   final CashflowModel alurdana;
@@ -26,13 +21,14 @@ class MyTransaction extends StatefulWidget {
 }
 
 class _MyTransactionState extends State<MyTransaction> {
-  _detailalurdana(String namatransaksi, String jumlahuang, String tanggal, String? imageURL) {
+  _detailalurdana(String namatransaksi, String jumlahuang, String tanggal,
+      String? imageURL) {
     showDialog(
         context: context,
         builder: (context) {
           return StatefulBuilder(
             builder: (BuildContext context, setState) {
-              return DetailAlurDana(
+              return DetailCashflow(
                 namatransaksi: namatransaksi,
                 jumlahuang: jumlahuang,
                 tanggal: tanggal,
@@ -45,7 +41,8 @@ class _MyTransactionState extends State<MyTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    String tanggal = DateFormat('dd-MMM-yyyy').format(widget.alurdana.createdAt);
+    String tanggal =
+        DateFormat('dd-MMM-yyyy').format(widget.alurdana.createdAt);
     return Padding(
       padding: const EdgeInsets.only(bottom: 12.0),
       child: Dismissible(
@@ -53,8 +50,8 @@ class _MyTransactionState extends State<MyTransaction> {
         direction: DismissDirection.horizontal,
         onDismissed: (direction) {
           if (direction == DismissDirection.startToEnd) {
-            context.read<CashflowBloc>().add(
-                CashflowEventDelete(id: widget.alurdana.id));
+            context.read<CashflowBloc>().add(CashflowEventDelete(
+                id: widget.alurdana.id, imageUrl: widget.alurdana.imageurl));
           } else if (direction == DismissDirection.endToStart) {}
         },
         confirmDismiss: (direction) async {
@@ -129,6 +126,7 @@ class _MyTransactionState extends State<MyTransaction> {
                   tanggal,
                   widget.alurdana.imageurl,
                 );
+                print(widget.alurdana.imageurl);
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -193,7 +191,7 @@ class _MyTransactionState extends State<MyTransaction> {
                   Text(
                     '${widget.alurdana.jenis == 'danamasuk' ? '+' : '-'}${FormatCurrency.convertToIdr(widget.alurdana.jumlah, 0)}',
                     style: TextStyle(
-                        color: (widget.alurdana.jenis== 'danamasuk'
+                        color: (widget.alurdana.jenis == 'danamasuk'
                             ? Colors.green
                             : Colors.red)),
                   ),

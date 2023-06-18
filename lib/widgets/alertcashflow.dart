@@ -1,7 +1,10 @@
 import 'dart:io';
 
+import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -50,13 +53,15 @@ class _AlertCashFlowState extends State<AlertCashFlow> {
 
     if (result != null) {
       setState(() {
-        _image = File(result.files.single.path!);
+        final fileBytes = result.files.single.bytes;
+        _image = fileBytes != null ? File.fromRawPath(fileBytes) : null;
       });
     }
   }
 
   void _simpanTransaction() {
-    final jumlahdana = _jumlahdanaC.text.trim();
+    final jumlahdana =
+        _jumlahdanaC.text.trim().replaceAll(RegExp(r'[^0-9]'), '');
     final keterangan = _keteranganC.text.trim();
     final jenis = _isIncome ? 'danamasuk' : 'danakeluar';
     _isIncome
@@ -108,6 +113,14 @@ class _AlertCashFlowState extends State<AlertCashFlow> {
                   child: Form(
                     key: _formKey,
                     child: TextFormField(
+                      keyboardType: TextInputType.number,
+                      inputFormatters: <TextInputFormatter>[
+                        CurrencyTextInputFormatter(
+                          locale: 'id',
+                          decimalDigits: 0,
+                          symbol: 'Rp ',
+                        )
+                      ],
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: 'Jumlah?',
@@ -139,6 +152,9 @@ class _AlertCashFlowState extends State<AlertCashFlow> {
                   ),
                 ),
               ],
+            ),
+            const SizedBox(
+              height: 10,
             ),
             Visibility(
               visible: _isIncome,
@@ -180,23 +196,9 @@ class _AlertCashFlowState extends State<AlertCashFlow> {
                 height: 5,
               ),
             ),
-            _image != null
-                ? Visibility(
-                    visible: !_isIncome,
-                    child: SizedBox(
-                        height: 200,
-                        child: Image.file(
-                          _image!,
-                          fit: BoxFit.cover,
-                        )),
-                  )
-                : Container(),
-            const SizedBox(
-              height: 10,
-            ),
             if (ResponsiveLayout.isDesktop(context))
               Visibility(
-                visible: _isIncome,
+                visible: !_isIncome,
                 child: Row(
                   children: [
                     Expanded(
@@ -209,6 +211,23 @@ class _AlertCashFlowState extends State<AlertCashFlow> {
                   ],
                 ),
               ),
+            _image != null
+                ? Visibility(
+                    visible: !_isIncome,
+                    child: SizedBox(
+                      height: 200,
+                      child: kIsWeb
+                          ? Image.file(
+                              _image!,
+                              fit: BoxFit.cover,
+                            )
+                          : Image.file(
+                              _image!,
+                              fit: BoxFit.cover,
+                            ),
+                    ),
+                  )
+                : const SizedBox.shrink(),
           ],
         ),
       ),

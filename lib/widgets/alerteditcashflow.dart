@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../responsive/responsive_layout.dart';
 import '../bloc/bloc.dart';
+import '../constants/constants.dart';
 import '../models/models.dart';
 
 class AlertEditDana extends StatefulWidget {
@@ -56,8 +57,8 @@ class _AlertEditDanaState extends State<AlertEditDana> {
               if (widget.alurdana.imageurl != null)
                 GestureDetector(
                   onLongPress: () {
-                    showImageViewer(
-                        context, NetworkImage(widget.alurdana.imageurl!),
+                    showImageViewer(context,
+                        NetworkImage(urlimage + widget.alurdana.imageurl!),
                         swipeDismissible: false);
                   },
                   child: Container(
@@ -66,7 +67,8 @@ class _AlertEditDanaState extends State<AlertEditDana> {
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         fit: BoxFit.cover,
-                        image: NetworkImage(widget.alurdana.imageurl!),
+                        image:
+                            NetworkImage(urlimage + widget.alurdana.imageurl!),
                       ),
                     ),
                   ),
@@ -165,7 +167,7 @@ class _AlertEditDanaState extends State<AlertEditDana> {
                 _image = null;
               });
             },
-            child: Text('Batal'),
+            child: const Text('Batal'),
           ),
           ElevatedButton(
             onPressed: () async {

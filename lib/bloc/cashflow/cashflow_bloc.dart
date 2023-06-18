@@ -24,7 +24,7 @@ class CashflowBloc extends Bloc<CashflowEvent, CashflowState> {
       }
 
       // Add a delay between API calls if necessary
-      await Future.delayed(const Duration(seconds: 10));
+      await Future.delayed(const Duration(seconds: 1));
     }
   }
 
@@ -36,6 +36,25 @@ class CashflowBloc extends Bloc<CashflowEvent, CashflowState> {
         emit(CashflowComplete());
       } catch (e) {
         emit(CashflowError("Tidak Bisa Menambah Cashflow"));
+      }
+    });
+
+    on<CashflowEventEdit>((event, emit) async {
+      emit(CashflowLoading());
+      try {
+        await cashflowapi.cashflowEdit(event);
+        emit(CashflowComplete());
+      } catch (e) {
+        emit(CashflowError("Tidak Bisa Mengedit Cashflow"));
+      }
+    });
+    on<CashflowEventDelete>((event, emit) async {
+      emit(CashflowLoading());
+      try {
+        await cashflowapi.cashflowDelete(event);
+        emit(CashflowComplete());
+      } catch (e) {
+        emit(CashflowError("Tidak Bisa Menghapus Cashflow"));
       }
     });
   }

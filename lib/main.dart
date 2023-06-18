@@ -21,9 +21,6 @@ class MyApp extends StatelessWidget {
         BlocProvider<CashflowBloc>(
           create: (context) => CashflowBloc(),
         ),
-        BlocProvider<CashflowBloc>(
-          create: (context) => CashflowBloc(),
-        ),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

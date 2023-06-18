@@ -3,14 +3,12 @@ import 'package:flutter/material.dart';
 
 import '../constants/constants.dart';
 
-
-
-class DetailAlurDana extends StatelessWidget {
+class DetailCashflow extends StatelessWidget {
   final String namatransaksi;
   final String jumlahuang;
   final String tanggal;
   String? imageURL;
-  DetailAlurDana(
+  DetailCashflow(
       {super.key,
       required this.namatransaksi,
       required this.jumlahuang,
@@ -27,10 +25,10 @@ class DetailAlurDana extends StatelessWidget {
       content: SingleChildScrollView(
         child: Column(
           children: [
-            if (imageURL != null)
+            if (imageURL != "")
               GestureDetector(
                 onLongPress: () {
-                  showImageViewer(context, NetworkImage(imageURL!),
+                  showImageViewer(context, NetworkImage(urlimage + imageURL!),
                       swipeDismissible: false);
                 },
                 child: Container(
@@ -39,7 +37,7 @@ class DetailAlurDana extends StatelessWidget {
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: NetworkImage(imageURL!),
+                      image: NetworkImage(urlimage + imageURL!),
                     ),
                   ),
                 ),
@@ -96,6 +94,5 @@ class DetailAlurDana extends StatelessWidget {
         )
       ],
     );
-    
   }
 }
