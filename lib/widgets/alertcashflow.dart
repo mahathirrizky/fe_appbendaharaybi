@@ -19,6 +19,7 @@ class AlertCashFlow extends StatefulWidget {
 }
 
 class _AlertCashFlowState extends State<AlertCashFlow> {
+  Uint8List? _imageBytes;
   final _jumlahdanaC = TextEditingController();
   final _keteranganC = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -55,6 +56,7 @@ class _AlertCashFlowState extends State<AlertCashFlow> {
       setState(() {
         final fileBytes = result.files.single.bytes;
         _image = fileBytes != null ? File.fromRawPath(fileBytes) : null;
+        _imageBytes = fileBytes;
       });
     }
   }
@@ -217,8 +219,8 @@ class _AlertCashFlowState extends State<AlertCashFlow> {
                     child: SizedBox(
                       height: 200,
                       child: kIsWeb
-                          ? Image.file(
-                              _image!,
+                          ? Image.memory(
+                              _imageBytes!,
                               fit: BoxFit.cover,
                             )
                           : Image.file(
