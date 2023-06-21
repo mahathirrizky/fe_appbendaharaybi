@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 
 import 'bloc/bloc.dart';
@@ -20,6 +21,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<CashflowBloc>(
           create: (context) => CashflowBloc(),
+        ),
+        BlocProvider<ExporttoexcelBloc>(
+          create: (context) => ExporttoexcelBloc(),
         ),
       ],
       child: MaterialApp.router(

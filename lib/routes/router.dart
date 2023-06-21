@@ -24,11 +24,11 @@ final router = GoRouter(
       name: Routes.home,
       builder: (context, state) => const HomePage(),
     ),
-    // GoRoute(
-    //   path: '/export',
-    //   name: Routes.export,
-    //   builder: (context, state) => const ExportPage(),
-    // ),
+    GoRoute(
+      path: '/export',
+      name: Routes.export,
+      builder: (context, state) => const ExportPage(),
+    ),
     GoRoute(
       path: '/login',
       name: Routes.login,

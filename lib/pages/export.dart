@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import '../bloc/bloc.dart';
 import '../constants/constants.dart';
 import '../responsive/responsive_layout.dart';
+import '../stream/stream.dart';
 import '../widgets/widgets.dart';
 
 class ExportPage extends StatefulWidget {
@@ -93,12 +94,12 @@ class _ExportPageState extends State<ExportPage> {
                             ),
                           ),
                         ),
-                        // streambuilderexport(alurdanaB, bulanaktif, tahunaktif),
-                        // const SizedBox(
-                        //   height: 10,
-                        // ),
-                        // ExportButton(
-                        //     bulanaktif: bulanaktif, namasheet: namasheet),
+                        streambuilderexport(alurdanaB, bulanaktif, tahunaktif),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        ExportButton(
+                            bulanaktif: bulanaktif, namasheet: namasheet),
                       ],
                     ),
                   ),
@@ -113,36 +114,37 @@ class _ExportPageState extends State<ExportPage> {
                     width: 50,
                     height: 50.0,
                     child: GestureDetector(
-                        onLongPress: () {
-                          showDialog(
-                            context: context,
-                            builder: (context) {
-                              return StatefulBuilder(
-                                builder: (BuildContext context, setState) {
-                                  return AlertTahun(
-                                      tahun: years,
-                                      tahunaktif: tahunaktif,
-                                      onTahunSelected: (selectedTahun) {
-                                        setState(() {
-                                          tahunaktif = selectedTahun;
-                                        });
+                      onLongPress: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return StatefulBuilder(
+                              builder: (BuildContext context, setState) {
+                                return AlertTahun(
+                                    tahun: years,
+                                    tahunaktif: tahunaktif,
+                                    onTahunSelected: (selectedTahun) {
+                                      setState(() {
+                                        tahunaktif = selectedTahun;
                                       });
-                                },
-                              );
-                            },
-                          ).then((selectedValue) {
-                            if (selectedValue != null) {
-                              setState(() {
-                                tahunaktif = selectedValue;
-                              });
-                            }
-                          });
-                        },
-                        child: Text(
-                          tahunaktif.toString(),
-                          style: const TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
-                        )),
+                                    });
+                              },
+                            );
+                          },
+                        ).then((selectedValue) {
+                          if (selectedValue != null) {
+                            setState(() {
+                              tahunaktif = selectedValue;
+                            });
+                          }
+                        });
+                      },
+                      child: Text(
+                        tahunaktif.toString(),
+                        style: const TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                    ),
                   ),
                   AspectRatio(
                     aspectRatio: ResponsiveLayout.isMobile(context) ? 2.5 : 10,
@@ -159,11 +161,11 @@ class _ExportPageState extends State<ExportPage> {
                       ),
                     ),
                   ),
-                  // streambuilderexport(alurdanaB, bulanaktif, tahunaktif),
+                  streambuilderexport(alurdanaB, bulanaktif, tahunaktif),
                   const SizedBox(
                     height: 10,
                   ),
-                  // ExportButton(bulanaktif: bulanaktif, namasheet: namasheet),
+                  ExportButton(bulanaktif: bulanaktif, namasheet: namasheet),
                 ],
               ),
             ),
